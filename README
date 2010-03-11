@@ -1,0 +1,63 @@
+Data::Predicate
+
+This is a library inspired by Apache Commons Collection Predicate library
+and google-collections Predicate library (both Java libraries). Predicates
+are transportable logic objects which boil down to a true/false response. 
+
+A number of predicates have already been built allowing for the combination
+of multiple predicates (and), partial matching (or) or reverse logic
+(not). These mixed in with more complex & Perl centric ideas (defined, number
+isa) allows us to build very complex logic in portions and then 
+build a final logic Object to represent the boolean concept.
+
+Predicates are not meant to replace normal if statement logic; more to 
+supplement it.
+
+Data::Predicate is the core class & default implementations are available
+from Data::Predicate::Predicates.
+
+In time this module may develop an XS library but for the moment it is written
+in PurePerl (for better or worse).  
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc Data::Predicate
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Predicate
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/Data-Predicate
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/Data-Predicate
+
+    Search CPAN
+        http://search.cpan.org/dist/Data-Predicate/
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2010 "EBI"
+
+This program was developed as part of work carried out by EMBL.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
