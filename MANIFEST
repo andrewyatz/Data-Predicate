@@ -1,8 +1,17 @@
 Changes
-MANIFEST
-Makefile.PL
+ignore.txt
+lib/Data/Predicate.pm
+lib/Data/Predicate/ClosurePredicate.pm
+lib/Data/Predicate/Predicates.pm
+MANIFEST			This list of files
+MANIFEST.SKIP
 README
-lib/Predicate.pm
 t/00-load.t
+t/basic-predicate.t
+t/can-predicate.t
+t/isa-predicate.t
 t/pod-coverage.t
 t/pod.t
+t/predicate-advanced-filters.t
+t/ref-predicate.t
+t/value-predicates.t

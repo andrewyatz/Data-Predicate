@@ -34,36 +34,36 @@ our %EXPORT_TAGS = (
 
 #Set of predicates which never change so we build once & cache; others may & do
 Readonly my %STATIC_PREDICATES => (
-  'true'  => EGUtils::Predicate::ClosurePredicate->new( 
+  'true'  => Data::Predicate::ClosurePredicate->new( 
     closure => sub { 1 } ,
     description => 'true'
   ),
-  'false' => EGUtils::Predicate::ClosurePredicate->new( 
+  'false' => Data::Predicate::ClosurePredicate->new( 
     closure => sub { 0 },
     description => 'false' 
   ),
-  'defined' => EGUtils::Predicate::ClosurePredicate->new(
+  'defined' => Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return ( defined $object ) ? 1 : 0;
     },
     description => 'defined'
   ),
-  'undef' => EGUtils::Predicate::ClosurePredicate->new(
+  'undef' => Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return ( defined $object ) ? 0 : 1;
     },
     description => 'undef'
   ),
-  'blessed' => EGUtils::Predicate::ClosurePredicate->new(
+  'blessed' => Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return ( blessed($object) ) ? 1 : 0;
     },
     description => 'blessed'
   ),
-  'number' => EGUtils::Predicate::ClosurePredicate->new(
+  'number' => Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return ( defined $object && looks_like_number($object) ) ? 1 : 0;
@@ -74,7 +74,7 @@ Readonly my %STATIC_PREDICATES => (
 
 sub p_and {
   my ( @predicates ) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       foreach my $pred (@predicates) {
@@ -90,7 +90,7 @@ sub p_and {
 
 sub p_or {
   my ( @predicates ) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       foreach my $pred (@predicates) {
@@ -106,7 +106,7 @@ sub p_or {
 
 sub p_not {
   my ($predicate) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return ($predicate->apply($object)) ? 0 : 1;
@@ -141,7 +141,7 @@ sub p_is_number {
 
 sub p_ref_type {
   my ($ref_type) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       my $ref = ref($object);
@@ -154,7 +154,7 @@ sub p_ref_type {
 
 sub p_isa {
   my ($isa) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return 0 unless p_blessed()->apply($object);
@@ -166,7 +166,7 @@ sub p_isa {
 
 sub p_can {
   my ($method) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       return 0 unless p_blessed()->apply($object);
@@ -178,11 +178,11 @@ sub p_can {
 
 sub p_string_equals {
   my ($str, $method) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       my $val = _invoke($object, $method);
-      return ( p_defined($val) && $val eq $str ) ? 1 : 0;
+      return ( p_defined->apply($val) && $val eq $str ) ? 1 : 0;
     },
     description => 'string_equals'
   );
@@ -190,11 +190,11 @@ sub p_string_equals {
 
 sub p_numeric_equals {
   my ($number, $method) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       my $val = _invoke($object, $method);
-      return ( p_is_number($val) && $val == $number ) ? 1 : 0;
+      return ( p_is_number->apply($val) && $val == $number ) ? 1 : 0;
     },
     description => 'numeric_equals'
   );
@@ -202,11 +202,11 @@ sub p_numeric_equals {
 
 sub p_regex {
   my ($regex, $method) = @_;
-  return EGUtils::Predicate::ClosurePredicate->new(
+  return Data::Predicate::ClosurePredicate->new(
     closure => sub {
       my ($object) = @_;
       my $val = _invoke($object, $method);
-      return ( p_defined($val) && $val =~ $regex) ? 1 : 0;
+      return ( p_defined->apply($val) && $val =~ $regex) ? 1 : 0;
     },
     description => 'regex'
   );

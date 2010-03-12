@@ -6,7 +6,7 @@ WriteMakefile(
     NAME                => 'Data::Predicate',
     AUTHOR              => q{"ayates" <"">},
     VERSION_FROM        => 'lib/Data/Predicate.pm',
-    ABSTRACT_FROM       => 'lib/Data/Predicate.pm',
+#    ABSTRACT_FROM       => 'lib/Data/Predicate.pm',
     ($ExtUtils::MakeMaker::VERSION >= 6.3002
       ? ('LICENSE'=> 'perl')
       : ()),
@@ -14,8 +14,9 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
         'Scalar::Util' => 0,
-        'Mouse' => 0
+        'Mouse' => 0,
+        'Test::Exception' => 0
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean               => { FILES => 'Predicates-*' },
+    clean               => { FILES => 'Data-Predicates-*' },
 );

@@ -31,7 +31,7 @@ sub all_true {
 sub all_false {
   my ($self, $objects) = @_;
   my $count = $self->_count_truth($objects);
-  return (scalar(@{$objects}) == $count) ? 0 : 1;
+  return ($count == 0) ? 1 : 0;
 }
 
 sub _count_truth {
