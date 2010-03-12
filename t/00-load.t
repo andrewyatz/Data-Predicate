@@ -6,4 +6,4 @@ BEGIN {
     use_ok( 'Data::Predicate' );
 }
 
-diag( "Testing Predicates $Data::Predicate::VERSION, Perl $], $^X" );
+diag( "Testing Data::Predicates $Data::Predicate::VERSION, Perl $], $^X" );
