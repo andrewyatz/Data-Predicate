@@ -1,5 +1,8 @@
 Revision history for Predicates
 
-0.01    Date/time
-        First version, released on an unsuspecting world.
+1.0     12/03/2010
+        First version
 
+1.0.1   31/03/2010
+        Modification to MANIFEST in response to issue 55632 (RT CPAN)
+     
