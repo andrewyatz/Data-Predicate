@@ -2,7 +2,7 @@ package Data::Predicate;
 
 use Mouse::Role;
 
-our $VERSION = '1.0.1';
+our $VERSION = '1.0.2';
 
 requires 'apply';
 

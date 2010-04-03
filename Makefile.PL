@@ -15,7 +15,8 @@ WriteMakefile(
         'Test::More' => 0,
         'Scalar::Util' => 0,
         'Mouse' => 0,
-        'Test::Exception' => 0
+        'Test::Exception' => 0,
+	'Readonly' => 0
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Data-Predicates-*' },
