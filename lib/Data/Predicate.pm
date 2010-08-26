@@ -1,8 +1,9 @@
 package Data::Predicate;
 
-our $VERSION = '2.0.0';
 use strict;
 use warnings;
+
+our $VERSION = '2.0.0';
 use Carp;
 
 sub new {
