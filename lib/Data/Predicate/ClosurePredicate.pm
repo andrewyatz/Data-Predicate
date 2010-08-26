@@ -1,18 +1,42 @@
 package Data::Predicate::ClosurePredicate;
 
-use Mouse;
+use strict;
+use warnings;
+use Carp;
 
-with 'Data::Predicate';
+use base qw(Data::Predicate);
 
-has 'closure' => ( isa => 'CodeRef', is => 'ro', required => 1 );
-has 'description' => ( isa => 'Str', is => 'ro', default => 'unknown' );
+sub new {
+  my ($class, %args) = @_;
+  
+  confess('No closure given; cannot create an object without one') 
+    unless defined $args{closure};
+  
+  my $self = $class->SUPER::new();
+  $self->closure($args{closure});
+  $self->description($args{description});
+  return $self;
+}
+
+sub closure {
+  my ($self, $closure) = @_;
+  if(defined $closure) {
+    confess("${closure} is not a CodeRef; cannot continue") unless ref($closure) eq 'CODE';
+    $self->{closure} = $closure;
+  }
+  return $self->{closure};
+}
+
+sub description {
+  my ($self, $description) = @_;
+  $self->{description} = $description if defined $description;
+  return $self->{description} || 'unknown';
+}
 
 sub apply {
   my ($self, $object) = @_;
   return $self->closure()->($object);
 }
-
-no Mouse;
 
 1;
 __END__
@@ -28,7 +52,7 @@ __END__
   Data::Predicate::ClosurePredicate->new(closure => sub {
     my ($object) = @_;
     return (defined $object) ? 1 : 0;
-  });
+  }, description => 'Returns true if the given object is defined');
 
 =head1 DESCRIPTION
 
@@ -38,7 +62,17 @@ us to build very specific tests whilst keeping our class count down. It
 also allows for rapid prototyping of predicates & should speed become
 an issue means the code can be easily migrated into a custom version.
 
-=head1 ATTRIBUTES
+=head1 METHODS
+
+=head2 new
+
+  Data::Predicate::ClosurePredicate->new(closure => sub {
+    my ($object) = @_;
+    return (defined $object) ? 1 : 0;
+  }, description => 'Returns true if the given object is defined');
+  
+Accepts 2 variables; closure & description. closure is a required 
+argument where as description is not but recommended.
 
 =head2 closure - required
 
@@ -53,20 +87,10 @@ be somewhat daunting.
 
 Optional & defaults to unknown.
 
-=head1 METHODS
-
 =head2 apply()
 
 Returns the value from an invocation of the attribute C<closure> with
 the incoming object.
-
-=head1 DEPENDENCIES
-
-=over 8
-
-=item Mouse
-
-=back
 
 =head1 AUTHOR
 
@@ -74,13 +98,31 @@ Andrew Yates
 
 =head1 LICENCE
 
-Copyright (C) 2010 "EBI"
+Copyright (c) 2010 - 2010 European Molecular Biology Laboratory.
 
-This program was developed as part of work carried out by EMBL.
+Author: Andrew Yates (ayatesattheebi - remove the relevant sections accordingly)
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of the Artistic License.
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
 
-See http://dev.perl.org/licenses/ for more information.
+   1. Redistributions of source code must retain the above copyright 
+      notice, this list of conditions and the following disclaimer.
+   2. Redistributions in binary form must reproduce the above copyright 
+      notice, this list of conditions and the following disclaimer in the 
+      documentation and/or other materials provided with the distribution.
+   3. Neither the name of the Genome Research Ltd nor the names of its 
+      contributors may be used to endorse or promote products derived from 
+      this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR 
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut

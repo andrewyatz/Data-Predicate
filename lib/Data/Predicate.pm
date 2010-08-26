@@ -1,10 +1,20 @@
 package Data::Predicate;
 
-use Mouse::Role;
+our $VERSION = '2.0.0';
+use strict;
+use warnings;
+use Carp;
 
-our $VERSION = '1.0.1';
+sub new {
+  my ($class) = @_;
+  $class = ref($class) || $class;
+  my $self = bless({}, $class);
+  return $self;
+}
 
-requires 'apply';
+sub apply {
+  confess('Not implemented at this level');
+}
 
 sub filter {
   my ($self, $values) = @_;
@@ -42,8 +52,6 @@ sub _count_truth {
   }
   return $count;
 }
-
-no Mouse::Role;
 
 1;
 __END__
@@ -112,19 +120,19 @@ a set of useful pre-built predicates. If this does not have a predicate to
 suit your mood then apply this role to a class of your own and start
 writing.
 
-=head1 MOUSE?
+=head1 WHERE HAS MOUSE GONE?
 
-Mouse is my post-modern meta-object protocol aware object builder of choice. 
-Moose is better but I program in Mouse. If you want it in Moose then fork
-& produce a Moose version; it should be functionally equivalent.
+I love Mouse and Moose but it was not a suitable choice for this project due
+to external users and the dependencies it introduces. It saddens me to remove
+it but in the long run I think it is the right decision.
 
 =head1 METHODS
 
 =head2 apply()
 
 The core method; give it a reference and the apply method will return true
-or false depending on the predicate contents. This is just a Mouse::Role
-and a required method for anything which uses this Role.
+or false depending on the predicate contents. Implemented to confess an
+error in this class.
 
 =head2 filter()
 
@@ -157,17 +165,35 @@ Andrew Yates
 
 =head1 VERSION
 
-1.0
+2.0.0
 
 =head1 LICENCE
 
-Copyright (C) 2010 "EBI"
+Copyright (c) 2010 - 2010 European Molecular Biology Laboratory.
 
-This program was developed as part of work carried out by EMBL.
+Author: Andrew Yates (ayatesattheebi - remove the relevant sections accordingly)
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of the Artistic License.
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
 
-See http://dev.perl.org/licenses/ for more information.
+   1. Redistributions of source code must retain the above copyright 
+      notice, this list of conditions and the following disclaimer.
+   2. Redistributions in binary form must reproduce the above copyright 
+      notice, this list of conditions and the following disclaimer in the 
+      documentation and/or other materials provided with the distribution.
+   3. Neither the name of the Genome Research Ltd nor the names of its 
+      contributors may be used to endorse or promote products derived from 
+      this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR 
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
