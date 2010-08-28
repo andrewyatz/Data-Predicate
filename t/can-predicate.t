@@ -1,9 +1,18 @@
 {
-  package One; 
-  use Mouse;
-  has 'val' => ( isa => 'Str', is => 'ro', default => 'hello' );
-  no Mouse;
-  1;
+  package One;
+  use strict;
+  use warnings;
+  sub new {
+    my($class,%args) = @_;
+    my $self = bless({},$class);
+    %{$self} = %args;
+    return $self;
+  }
+  sub val {
+    my ($self, $val) = @_;
+    $self->{val} = $val if defined $val;
+    return $self->{val} || 'hello';
+  }
   package Tmp;
   sub new { return bless([], 'Tmp');}
   sub val { my ($self) = @_; return $self->[0]; }

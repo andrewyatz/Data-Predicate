@@ -129,6 +129,11 @@ it but in the long run I think it is the right decision.
 
 =head1 METHODS
 
+=head2 new()
+
+Basic new method which does blessing of the current variable. Override & extend
+to bring your own slant to a predicate if required.
+
 =head2 apply()
 
 The core method; give it a reference and the apply method will return true

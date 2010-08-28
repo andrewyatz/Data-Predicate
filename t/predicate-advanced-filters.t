@@ -1,6 +1,10 @@
 package One;
-use Mouse;
-no Mouse;
+use strict;
+use warnings;
+sub new {
+  my ($class) = @_;
+  return bless({}, $class);
+}
 
 package main;
 

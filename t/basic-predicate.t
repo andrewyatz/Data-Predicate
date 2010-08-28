@@ -1,12 +1,21 @@
 package One;
-use Mouse;
-has 'val' => ( isa => 'Int', is => 'ro' );
-no Mouse;
-
+use strict;
+use warnings;
+sub new {
+  my($class,%args) = @_;
+  my $self = bless({},$class);
+  %{$self} = %args;
+  return $self;
+}
+sub val {
+  my ($self, $val) = @_;
+  $self->{val} = $val if defined $val;
+  return $self->{val};
+}
 package Two;
-use Mouse;
-extends 'One';
-no Mouse;
+use strict;
+use warnings;
+use base qw(One);
 
 package main;
 
