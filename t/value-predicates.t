@@ -9,14 +9,12 @@
     return $self;
   }
   sub str {
-    my ($self, $val) = @_;
-    $self->{val} = $val if defined $val;
-    return $self->{val} || 'hello';
+    my ($self) = @_;
+    return $self->{str} || 'hello';
   }
   sub num {
-    my ($self, $val) = @_;
-    $self->{val} = $val if defined $val;
-    return $self->{val} || 1;
+    my ($self) = @_;
+    return $self->{num} || 1;
   }
   package Two;
   use strict;
