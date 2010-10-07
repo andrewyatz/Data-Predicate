@@ -30,7 +30,7 @@ package main;
 use strict;
 use warnings;
 use Scalar::Util qw(blessed looks_like_number);
-use Test::More tests => 31;
+use Test::More tests => 41;
 use Test::Exception;
 
 use Data::Predicate::Predicates qw(:all);
@@ -113,3 +113,17 @@ $test_value_invoke_predicates->(
   [Tmp->new()]
 );
 
+my $substring = 'he';
+diag 'p_substring() with '.$substring;
+$test_value_predicates->(
+  p_substring($substring), 
+  [undef, 1, [], {}], 
+  ['hello', ' hello', 'addasoudf hel efdlindfs']
+);
+
+$test_value_invoke_predicates->(
+  p_substring($substring, 'str'),
+  [Two->new(str => 'boo')],
+  [One->new()],
+  [Tmp->new()]
+);

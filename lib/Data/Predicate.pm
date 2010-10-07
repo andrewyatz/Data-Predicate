@@ -3,7 +3,7 @@ package Data::Predicate;
 use strict;
 use warnings;
 
-our $VERSION = '2.0.1';
+our $VERSION = '2.1.0';
 use Carp;
 
 sub new {
