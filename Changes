@@ -18,7 +18,7 @@ Revision history for Predicates
         Removed final dependencies on Mouse
         Now at 100% POD coverage of subroutines
 
-2.1.0		07/10/2010
-				Introduced a new predicate p_substring()
-				Test cases added for new predicate
-				Improved descriptions of predicate; helps in debug sessions
+2.1.0   07/10/2010
+        Introduced a new predicate p_substring()
+        Test cases added for new predicate
+        Improved descriptions of predicate; helps in debug sessions
