@@ -22,3 +22,7 @@ Revision history for Predicates
         Introduced a new predicate p_substring()
         Test cases added for new predicate
         Improved descriptions of predicate; helps in debug sessions
+
+2.1.1   08/10/2010
+        Modification for pre 5.8 Perl with Readonly
+        Added new test to the tags list
