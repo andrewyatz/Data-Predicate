@@ -31,11 +31,12 @@ our %EXPORT_TAGS = (
   logic    => [qw(p_and p_or p_not)],
   defaults => [qw(p_always_true p_always_false)],
   tests    => [qw(p_defined p_undef p_blessed p_is_number p_ref_type 
-                  p_isa p_can p_numeric_equals p_string_equals p_regex)],
+                  p_isa p_can p_numeric_equals p_string_equals 
+                  p_regex p_substring)],
 );
 
 #Set of predicates which never change so we build once & cache; others may & do
-Readonly my %STATIC_PREDICATES => (
+Readonly::Hash my %STATIC_PREDICATES => (
   'true'  => Data::Predicate::ClosurePredicate->new( 
     closure => sub { 1 } ,
     description => 'true'
